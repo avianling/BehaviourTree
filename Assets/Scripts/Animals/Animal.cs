@@ -176,6 +176,22 @@ public class Animal : MonoBehaviour, ITargettable {
         }
     }
 
+    // How much are we willing to put ourself into danger to eat?
+    public float HungerDesperation()
+    {
+        if ( hunger < 20 )
+        {
+            return 0f;
+        } else
+        {
+            if ( hunger > 40 )
+            {
+                return 1f;
+            }
+            return (hunger - 20f) / 20f;
+        }
+    }
+
     public bool IsAlive()
     {
         return this != null;

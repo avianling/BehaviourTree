@@ -29,6 +29,7 @@ public class Breed : Behaviour
         {
             AnimalFactory.Instance.CreateAnimal(target.type).transform.position = target.transform.position;
             target.hunger += 15;
+            target.target = null;
             return BehaviourState.Completed;
         } else
         {

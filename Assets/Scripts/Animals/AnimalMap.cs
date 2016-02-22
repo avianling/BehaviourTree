@@ -15,6 +15,34 @@ public class AnimalMap : MonoBehaviour {
         animalMap = this;
         availableHerds = new Dictionary<AnimalTypes, List<Herd>>();
     }
+
+    public float GetFearOfPosition( AnimalTypes type, Vector3 position )
+    {
+        float maximumFear = 0f;
+
+        for ( int i=0; i < animals.Count; i++ )
+        {
+            float effectiveFear = AnimalRelationships.Instance.GetOpinionOf(type, animals[i].type).fear;
+            effectiveFear = Attenuate(effectiveFear, (animals[i].GetPosition() - position).magnitude);
+            if (maximumFear < effectiveFear)
+            {
+                maximumFear = effectiveFear;
+            }
+        }
+
+        return maximumFear;
+    }
+
+    private float Attenuate( float value, float distance )
+    {
+        if ( distance > WalkToBehaviour.intimidationRange )
+        {
+            return 0f;
+        } else
+        {
+            return value * (WalkToBehaviour.intimidationRange - distance) / WalkToBehaviour.intimidationRange;
+        }
+    }
     
     // returns a herd to the list of available herds.
     public void HerdIsAvailable( Herd herd )

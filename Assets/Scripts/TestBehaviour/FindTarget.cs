@@ -8,7 +8,7 @@ public abstract class FindTarget : Behaviour {
     {
         get
         {
-            return 10f;
+            return 50f;
         }
     }
 
@@ -19,15 +19,39 @@ public abstract class FindTarget : Behaviour {
         return other.CanBeTargetted(target);
     }
 
+    // How desperate is this animal to do this action?
+    // if desperation > fear, ignore all fear.
+    protected virtual float GetDesperation()
+    {
+        return 0f;
+    }
+
+    private float GetFearInfluence( ITargettable other )
+    {
+        // Based upon the proximity of this target to things we fear, pick another target.
+        // fear should be overridden by desperation?
+        // how should this be represented?
+        // 1f = no fear modifier.
+        float fear = 1f - AnimalMap.animalMap.GetFearOfPosition(target.type, other.GetPosition());
+
+        if (fear < GetDesperation())
+        {
+            return 1f;
+        } else
+        {
+            return fear;
+        }
+    }
+
     public virtual float GetTargetScore( ITargettable other )
     {
         float dist = (other.GetPosition() - target.transform.position).magnitude;
         if (dist > 0)
         {
-            return (maxRange - dist)/ maxRange;
+            return ((maxRange - dist)/ maxRange) * GetFearInfluence(other);
         } else
         {
-            return 1f;
+            return GetFearInfluence(other);
         }
     }
 

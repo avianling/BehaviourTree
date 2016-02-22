@@ -6,10 +6,15 @@ public class FindFood : FindTarget
 {
     public FindFood(string name) : base(name) { }
 
+    protected override float GetDesperation()
+    {
+        return target.HungerDesperation();
+    }
+
     public override bool IsTargettable(ITargettable other)
     {
         Animal animal = other as Animal;
-        if ( animal == null || animal.type != AnimalTypes.Shepard)
+        if ( animal == null || animal.type == AnimalTypes.Bunny)
         {
             return base.IsTargettable(other);
         } else

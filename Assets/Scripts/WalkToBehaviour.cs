@@ -8,7 +8,7 @@ public class WalkToBehaviour : Behaviour
 
     public const float lookaheadDistance = 0.5f;
     public const float intimidationRange = 15;
-    public const float avoidanceStrength = 3f;
+    public const float avoidanceStrength = 2f;
 
     public WalkToBehaviour(string name) : base(name) { }
 
@@ -95,7 +95,7 @@ public class WalkToBehaviour : Behaviour
     {
         Vector3 toTarget = target.targetPosition - target.transform.position;
         float distance = toTarget.magnitude;
-        if ( distance < 0.05f )
+        if ( distance < 0.25f )
         {
             target.transform.position = target.targetPosition;
             return BehaviourState.Completed;
@@ -109,7 +109,7 @@ public class WalkToBehaviour : Behaviour
 
             // work out if the avoidance vector is too close to the current direction.
             Vector3 avoidanceDirection = avoidanceVector.normalized;
-            if ( Vector3.Dot(target.transform.forward, avoidanceDirection) < -0.9f )
+            if ( Vector3.Dot(target.transform.forward, avoidanceDirection) < -0.75f )
             {
                 return BehaviourState.Failed;
             } else
