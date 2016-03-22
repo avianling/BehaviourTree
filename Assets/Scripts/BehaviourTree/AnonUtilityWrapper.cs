@@ -13,7 +13,14 @@ public class AnonUtilityWrapper : Decorator, IUtilityBehaviour {
     {
         get
         {
-            return base.Description + ".\n Utility: " + Utility();
+            if (target == null)
+            {
+                return "";
+            }
+            else
+            {
+                return base.Description + ".\n Utility: " + Utility();
+            }
         }
     }
 

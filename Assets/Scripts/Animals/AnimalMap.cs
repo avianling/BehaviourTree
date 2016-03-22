@@ -99,6 +99,10 @@ public class AnimalMap : MonoBehaviour {
                     }
                 }
 
+                if ( closestHerd == null )
+                {
+                    Debug.LogError("Wut, no this cant actually happen.");
+                }
                 return closestHerd;
             }
         }

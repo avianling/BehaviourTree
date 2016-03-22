@@ -8,7 +8,7 @@ public class WalkToBehaviour : Behaviour
 
     public const float lookaheadDistance = 0.5f;
     public const float intimidationRange = 15;
-    public const float avoidanceStrength = 2f;
+    public const float avoidanceStrength = 0.8f;
 
     public WalkToBehaviour(string name) : base(name) { }
 

@@ -95,6 +95,10 @@ public class AnimalFactory : MonoBehaviour {
         eatFoodDesire.child = findFoodSubtree;
         eatFoodDesire.utilityFunction = (x) =>
         {
+            if ( x == null || x.target == null )
+            {
+                return 0f;
+            }
             if (x.target.eating)
             {
                 return 1f;

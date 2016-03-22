@@ -40,7 +40,7 @@ public class FindHatedTarget : FindTarget {
     {
         float value = 0f;
         hatedTypes.TryGetValue(((Animal)other).type, out value);
-        return base.GetTargetScore(other) * hatedTypes[((Animal)other).type] * 2f;
+        return base.GetTargetScore(other) * hatedTypes[((Animal)other).type] * 10f;
     }
 
     public float GetUtility()

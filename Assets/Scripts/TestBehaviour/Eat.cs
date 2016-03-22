@@ -39,28 +39,16 @@ public class Eat : Behaviour
             Animal hunted = target.target as Animal;
             hunted.Killed(target);
             target.timesEaten++;
-            target.hunger -= 15;
+            target.hunger = 0;
             return BehaviourState.Completed;
         } else
         {
             Carrot source = target.target as Carrot;
-            float eaten = source.foodRemaining;
-            source.foodRemaining -= eaten;
-            target.hunger -= eaten;
-            if (source.foodRemaining <= 0)
-            {
-                // remove the food source.
-                source.Die();
-                target.timesEaten++;
-                return BehaviourState.Completed;
-            } else
-            {
-                return BehaviourState.Running;
-            }
+            target.hunger = 0;
+            source.Die();
+            target.timesEaten++;
+            return BehaviourState.Completed;
         }
     }
-
-    public void End()
-    {
-    }
+    
 }
