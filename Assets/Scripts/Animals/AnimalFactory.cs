@@ -47,7 +47,17 @@ public class AnimalFactory : MonoBehaviour {
 
     private IBehaviour CreateBunnyAI()
     {
-        Selector mainSelector = new Selector("Main Selector");
+        Selector mainSelector = new Selector("Main Selector")
+            .Add(
+                idleDesire
+            );
+
+
+
+        //mainSelector.children.AddRange(new IBehaviour[] { idleDesire, eatFoodDesire, avoidDangerDesire, attackHatedDecider });
+
+
+
 
         // Idle subtree.
         Selector idleSelector = new Selector("Idle Selector");

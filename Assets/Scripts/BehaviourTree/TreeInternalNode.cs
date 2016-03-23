@@ -101,4 +101,15 @@ public abstract class TreeInternalNode : IBehaviour
             children[i].SetTarget(animal);
         }
     }
+
+
+    /// <summary>
+    /// Chainable Add function
+    /// </summary>
+    public TreeInternalNode Add(params IBehaviour[] newChildren)
+    {
+        children.AddRange(newChildren);
+        return this;
+    }
+
 }
